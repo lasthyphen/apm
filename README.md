@@ -2,11 +2,11 @@
 
 **Note: This code is currently in Alpha. Proceed at your own risk.**
 
-`apm` is a command-line tool to manage virtual machines binaries for
-[dijetsgo](https://github.com/ava-labs/dijetsgo).
+`apm` is a command-line tool to manage ECC Engines binaries for
+[dijetsgo](https://github.com/lasthyphen/dijetsgo).
 
-`apm` allows users to build their own custom repositories to provide virtual machine and subnet definitions outside of
-the [dijets-plugins-core](https://github.com/ava-labs/dijets-plugins-core) repository. `dijets-plugins-core`
+`apm` allows users to build their own custom repositories to provide ECC Engine and subnet definitions outside of
+the [dijets-plugins-core](https://github.com/lasthyphen/dijets-plugins-core) repository. `dijets-plugins-core`
 is a community-sourced set of plugins and subnets that ships with the `apm`, but users have the option of adding their own using
 the `add-repository` command.
 
@@ -18,7 +18,7 @@ the `add-repository` command.
 To download a binary for the latest release, run:
 
 ```
-curl -sSfL https://raw.githubusercontent.com/ava-labs/apm/master/scripts/install.sh | sh -s
+curl -sSfL https://raw.githubusercontent.com/lasthyphen/apm/master/scripts/install.sh | sh -s
 ```
 
 The binary will be installed inside the `./bin` directory (relative to where the install command was run).
@@ -39,7 +39,7 @@ To add it to your path permanently, add an export command to your shell initiali
 To download the binary into a specific directory, run:
 
 ```
-curl -sSfL https://raw.githubusercontent.com/ava-labs/apm/master/scripts/install.sh | sh -s -- -b <relative directory>
+curl -sSfL https://raw.githubusercontent.com/lasthyphen/apm/master/scripts/install.sh | sh -s -- -b <relative directory>
 ```
 
 ### Source
@@ -57,7 +57,7 @@ The resulting `apm` binary will be available in `./build/apm`.
 Starts tracking a plugin repository.
 
 ```shell
-apm add-repository --alias ava-labs/core --url https://github.com/ava-labs/avalanche-plugins-core.git --branch master
+apm add-repository --alias ava-labs/core --url https://github.com/lasthyphen/avalanche-plugins-core.git --branch master
 ```
 
 #### Parameters:
@@ -66,12 +66,12 @@ apm add-repository --alias ava-labs/core --url https://github.com/ava-labs/avala
 - `--branch`: The branch name to track.
  
 ### install-vm
-Installs a virtual machine by its alias. Either a partial alias (e.g `spacesvm`) or a fully qualified name including the repository (e.g `ava-labs/core:spacesvm`) to disambiguate between multiple repositories can be used.
+Installs a ECC Engine by its alias. Either a partial alias (e.g `spacesvm`) or a fully qualified name including the repository (e.g `ava-labs/core:spacesvm`) to disambiguate between multiple repositories can be used.
 
 If multiple matches are found (e.g `repository-1/foovm`, `repository-2/foovm`), you will be required to specify the
-fully qualified name of the virtual machine to disambiguate the repository to install from.
+fully qualified name of the ECC Engine to disambiguate the repository to install from.
 
-This will install the virtual machine binary to your `avalanchego` plugin path.
+This will install the ECC Engine binary to your `avalanchego` plugin path.
 
 ```shell
 apm install-vm --vm spacesvm
@@ -84,7 +84,7 @@ apm install-vm --vm spacesvm
 ### join-subnet
 Joins a subnet by its alias. Either a partial alias (e.g `spaces`) or a fully qualified name including the repository (e.g `ava-labs/core:spaces`) to disambiguate between multiple repositories can be used.
 
-This will install dependencies for the subnet by calling `install-vm` on each virtual machine required by the subnet.
+This will install dependencies for the subnet by calling `install-vm` on each ECC Engine required by the subnet.
 
 If multiple matches are found (e.g `repository-1/foo`, `repository-2/foo`), you will be required to specify the
 fully qualified name of the subnet definition to disambiguate the repository to install from.
@@ -105,12 +105,12 @@ apm list-repositories
 ```
 
 ### uninstall-vm
-Installs a virtual machine by its alias.
+Installs a ECC Engine by its alias.
 
 If multiple matches are found (e.g `repository-1/foovm`, `repository-2/foovm`), you will be required to specify the
-fully qualified name of the virtual machine to disambiguate the repository to install from.
+fully qualified name of the ECC Engine to disambiguate the repository to install from.
 
-This will remove the virtual machine binary from your `avalanchego` plugin path.
+This will remove the ECC Engine binary from your `avalanchego` plugin path.
 
 ```shell
 apm uninstall-vm --vm spacesvm
@@ -130,10 +130,10 @@ apm list-repositories
 
 ### upgrade
 
-Upgrades a virtual machine binary. If one is not provided, this will upgrade all virtual machine binaries in your
+Upgrades a ECC Engine binary. If one is not provided, this will upgrade all ECC Engine binaries in your
 `avalanchego` plugin path with the latest synced definitions.
 
-For a virtual machine to be upgraded, it must have been installed using the `apm`.
+For a ECC Engine to be upgraded, it must have been installed using the `apm`.
 
 ```shell
 apm upgrade
@@ -164,8 +164,8 @@ apm remove-repository --alias organization/repository
 ```text
 $ ./build/apm join-subnet --subnet spaces
 
-Installing virtual machines for subnet Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk.
-Downloading https://github.com/ava-labs/spacesvm/archive/refs/tags/v0.0.3.tar.gz...
+Installing ECC Engines for subnet Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk.
+Downloading https://github.com/lasthyphen/spacesvm/archive/refs/tags/v0.0.3.tar.gz...
 HTTP response 200 OK
 Calculating checksums...
 Saw expected checksum value of 1ac250f6c40472f22eaf0616fc8c886078a4eaa9b2b85fbb4fb7783a1db6af3f
@@ -176,12 +176,12 @@ Building spacesvm in ./build/sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm
 Building spaces-cli in ./build/spaces-cli
 Moving binary sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm into plugin directory...
 Cleaning up temporary files...
-Adding virtual machine sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm to installation registry...
-Successfully installed ava-labs/avalanche-plugins-core:spacesvm@v0.0.4 in /Users/joshua.kim/go/src/github.com/ava-labs/avalanchego/build/plugins/sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm
-Updating virtual machines...
-Node at 127.0.0.1:9650/ext/admin was offline. Virtual machines will be available upon node startup.
+Adding ECC Engine sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm to installation registry...
+Successfully installed ava-labs/avalanche-plugins-core:spacesvm@v0.0.4 in /Users/joshua.kim/go/src/github.com/lasthyphen/avalanchego/build/plugins/sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm
+Updating ECC Engines...
+Node at 127.0.0.1:9650/ext/admin was offline. ECC Engines will be available upon node startup.
 Whitelisting subnet Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk...
-Finished installing virtual machines for subnet Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk.
+Finished installing ECC Engines for subnet Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk.
 ```
 
 ### Setting up Credentials for a Private Plugin Repository
